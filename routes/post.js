@@ -36,8 +36,7 @@ router.get("/:id", authMiddleware, async (req, res) => {
 router.post("/", isAdminMiddleware, async (req, res) => {
   try {
     const newPost = new Post({
-      customerName: req.body.customerName,
-      customerEmail: req.body.customerEmail,
+      user: req.user._id,
       title: req.body.title,
       text: req.body.text,
       image: req.body.image,

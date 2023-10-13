@@ -2,20 +2,16 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const postSchema = new Schema({
-  customerName: {
-    type: String,
-    required: true,
-  },
-  customerEmail: {
-    type: String,
-    required: true,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
   title: {
     type: String,
     required: true,
   },
-  text:{
-    type:String,
+  text: {
+    type: String,
     required: true,
   },
   image: {
