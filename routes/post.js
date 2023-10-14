@@ -6,27 +6,6 @@ const Post = require("../models/post");
 const authMiddleware = require("../middleware/auth");
 const isAdminMiddleware = require("../middleware/isAdmin");
 
-router.get("/", authMiddleware, async (req, res) => {
-  try {
-    const { status } = req.query;
-    let filter = {};
-
-    if (status) {
-      filter.status = status;
-    }
-
-    if (req.user && req.user.role === "user") {
-      filter.customerEmail = req.user.email;
-    }
-
-    res
-      .status(200)
-      .send(await Post.find(filter).populate("post").sort({ _id: -1 }));
-  } catch (error) {
-    res.status(400).send({ message: "Post not found" });
-  }
-});
-
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
     const data = await Post.findOne({ _id: req.params.id });
