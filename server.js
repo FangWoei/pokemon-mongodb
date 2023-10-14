@@ -36,7 +36,7 @@ const postRouter = require("./routes/post");
 const productRouter = require("./routes/product");
 
 app.use("/favorite", favoriteRouter);
-app.use("/post", postRouter);
+app.use("/posts", postRouter);
 app.use("/pokemons", pokeRouter);
 app.use("/orders", orderRouter);
 app.use("/products", productRouter);

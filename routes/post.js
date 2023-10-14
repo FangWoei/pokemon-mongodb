@@ -14,9 +14,7 @@ router.get("/", authMiddleware, async (req, res) => {
     if (status) {
       filter.status = status;
     }
-    res
-      .status(200)
-      .send(await Post.find(filter).populate("post").sort({ _id: -1 }));
+    res.status(200);
   } catch (error) {
     res.status(400).send({ message: "Post not found" });
   }
