@@ -14,7 +14,7 @@ router.get("/", authMiddleware, async (req, res) => {
     if (status) {
       filter.status = status;
     }
-    res.status(200);
+    res.status(200).send(await Post.find(filter));
   } catch (error) {
     res.status(400).send({ message: "Post not found" });
   }
@@ -46,7 +46,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-router.delete("/:id", isAdminMiddleware, async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const post_id = req.params.id;
     const deletePost = await Post.findByIdAndDelete(post_id);

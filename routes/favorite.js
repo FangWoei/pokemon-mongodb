@@ -15,8 +15,8 @@ router.get("/", authMiddleware, async (req, res) => {
       filter.status = status;
     }
 
-    if (req.user && req.user.role === "user") {
-      filter.customerEmail = req.user.email;
+    if (req.user) {
+      filter.user = req.user._id;
     }
 
     res
@@ -51,7 +51,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-router.delete("/:id", isAdminMiddleware, async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const favorite_id = req.params.id;
     const deletefav = await Favorite.findByIdAndDelete(favorite_id);
